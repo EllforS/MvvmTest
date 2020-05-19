@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data class="MainBinding">
+
+        <variable
+            name="activity"
+            type="com.ellfors.mvvmtest.biz.MainActivity" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg"
+        tools:context=".biz.MainActivity">
+
+        <Button
+            android:id="@+id/btn_to_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->activity.toImg()}"
+            android:text="To Image"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/btn_to_list"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
+            android:id="@+id/btn_to_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->activity.toList()}"
+            android:text="To List"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/btn_to_time"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_to_img" />
+
+        <Button
+            android:id="@+id/btn_to_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->activity.toTime()}"
+            android:text="To Time"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_to_list" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+
+
