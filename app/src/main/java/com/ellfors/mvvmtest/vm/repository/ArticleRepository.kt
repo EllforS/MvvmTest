@@ -20,6 +20,6 @@ class ArticleRepository : BaseRepository() {
             }
     }
 
-    suspend fun getArticles() = getHttpService.getArticles()
+    suspend fun getArticles(page: Int) = getHttpService.getArticles(page)
 
 }

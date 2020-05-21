@@ -15,10 +15,11 @@ import java.lang.Exception
  */
 open class BaseViewModel : ViewModel() {
 
-    val mException = MutableLiveData(BaseException())
+    val mException = MutableLiveData<BaseException>()
 
     /**
      * 网络请求协程
+     * 返回数据本身
      */
     fun <T> launchIO(
         block: suspend CoroutineScope.() -> BaseResponse<T>,
@@ -31,7 +32,39 @@ open class BaseViewModel : ViewModel() {
                 { withContext(Dispatchers.IO) { block() } },
                 { res ->
                     executeResponse(res) { success(it) }
-                    mException.postValue(BaseException())
+                },
+                {
+                    error(it)
+                    mException.postValue(it)
+                    Toast.makeText(MyApp.context, it.message, Toast.LENGTH_SHORT).show()
+                },
+                {
+                    complete()
+                }
+            )
+        }
+    }
+
+    /**
+     * 网络请求协程
+     * 返回BaseResponse
+     */
+    fun <T> launchIOByBase(
+        block: suspend CoroutineScope.() -> BaseResponse<T>,
+        success: (BaseResponse<T>) -> Unit,
+        error: (BaseException) -> Unit = { },
+        complete: () -> Unit = {}
+    ) {
+        launchUI {
+            handleException(
+                { withContext(Dispatchers.IO) { block() } },
+                { res ->
+                    coroutineScope {
+                        if (res.status == 100)
+                            success(res)
+                        else
+                            throw Exception("这里是Msg")
+                    }
                 },
                 {
                     error(it)

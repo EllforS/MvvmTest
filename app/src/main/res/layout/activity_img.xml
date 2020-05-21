@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data class="ImageBinding">
 
         <variable
-            name="girl"
-            type="com.ellfors.mvvmtest.bean.Girl" />
-
-        <variable
-            name="activity"
-            type="com.ellfors.mvvmtest.biz.img.MyImageActivity" />
+            name="vm"
+            type="com.ellfors.mvvmtest.vm.viewmodel.ImageVM" />
 
     </data>
 
@@ -29,6 +26,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="图片" />
 
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{vm.girl.title}"
+            app:layout_constraintBottom_toTopOf="@+id/iv_img"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:text="占位占位" />
+
         <ImageView
             android:id="@+id/iv_img"
             android:layout_width="0dp"
@@ -36,14 +45,14 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_get"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:loadImg="@{girl.url}" />
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:loadImg="@{vm.girl.url}" />
 
         <Button
             android:id="@+id/btn_get"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{()->activity.refreshImg()}"
+            android:onClick="@{()->vm.refreshImage()}"
             android:text="Get Image"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"

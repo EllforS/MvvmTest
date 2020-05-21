@@ -4,6 +4,7 @@ import com.ellfors.mvvmtest.bean.ArticlesBean
 import com.ellfors.mvvmtest.bean.BaseResponse
 import com.ellfors.mvvmtest.bean.Girl
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * HttpApi
@@ -12,8 +13,10 @@ import retrofit2.http.GET
 interface HttpService {
 
     @GET("https://gank.io/api/v2/random/category/Girl/type/Girl/count/1")
-    suspend fun refreshImage(): BaseResponse<List<Girl>>
+    suspend fun refreshImage(): BaseResponse<MutableList<Girl>>
 
-    @GET("https://gank.io/api/v2/random/category/GanHuo/type/Android/count/10")
-    suspend fun getArticles(): BaseResponse<List<ArticlesBean>>
+    @GET("https://gank.io/api/v2/data/category/GanHuo/type/Android/page/{page}/count/10")
+    suspend fun getArticles(
+        @Path("page") path: Int
+    ): BaseResponse<MutableList<ArticlesBean>>
 }

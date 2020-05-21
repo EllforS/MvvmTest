@@ -1,15 +1,15 @@
-package com.ellfors.mvvmtest.binding
+package com.ellfors.mvvmtest.bindadp
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 
 @BindingAdapter("loadImg")
-fun loadImg(view: ImageView, url: String?) {
+fun ImageView.loadImg(url: String?) {
     url?.let {
-        Glide.with(view.context)
+        Glide.with(context)
             .load(url)
             .centerInside()
-            .into(view)
+            .into(this)
     }
 }

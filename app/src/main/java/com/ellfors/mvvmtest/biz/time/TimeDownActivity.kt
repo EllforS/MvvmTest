@@ -7,6 +7,7 @@ import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseActivity
 import com.ellfors.mvvmtest.databinding.TimeDownBinding
 import com.ellfors.mvvmtest.vm.InjectUtils
+import com.ellfors.mvvmtest.vm.viewmodel.TimeDownVM
 
 /**
  * TimeDownActivity
@@ -14,7 +15,7 @@ import com.ellfors.mvvmtest.vm.InjectUtils
  */
 class TimeDownActivity : BaseActivity<TimeDownBinding>() {
 
-    val mViewModel by lazy {
+    val mViewModel: TimeDownVM by lazy {
         InjectUtils.injectTimeDownVM(this)
     }
 
@@ -32,13 +33,6 @@ class TimeDownActivity : BaseActivity<TimeDownBinding>() {
     }
 
     override fun observerUI() {
-        mViewModel.let { vm ->
-            vm.mTime.observe(this, Observer {
-                mBinding.tvShow.text = it
-            })
-            vm.btnEnable.observe(this, Observer {
-                mBinding.btnDown.isEnabled = it
-            })
-        }
+
     }
 }

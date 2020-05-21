@@ -1,5 +1,6 @@
 package com.ellfors.mvvmtest.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -23,6 +24,7 @@ import com.ellfors.mvvmtest.utils.DensityUtil;
  */
 public class CommonToolBar extends FrameLayout {
 
+    private static final Integer HEIGHT = 48;
     private String mTitleStr;
 
     private CommonTopCallBack mCallBack;
@@ -55,7 +57,7 @@ public class CommonToolBar extends FrameLayout {
         if (heightMode == MeasureSpec.EXACTLY)
             height = mParentHeight;
         else
-            height = DensityUtil.INSTANCE.dp2px(42);
+            height = DensityUtil.INSTANCE.dp2px(HEIGHT);
         setMeasuredDimension(width, height);
         setBackgroundColor(Color.WHITE);
     }
@@ -76,7 +78,7 @@ public class CommonToolBar extends FrameLayout {
         TextView back = new TextView(context);
         FrameLayout.LayoutParams params = new LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
-                DensityUtil.INSTANCE.dp2px(42)
+                DensityUtil.INSTANCE.dp2px(HEIGHT)
         );
         params.gravity = Gravity.START | Gravity.CENTER_VERTICAL;
         back.setLayoutParams(params);
@@ -88,6 +90,8 @@ public class CommonToolBar extends FrameLayout {
         back.setOnClickListener(view -> {
             if (mCallBack != null)
                 mCallBack.onBackClick(view);
+            else if (context instanceof Activity)
+                ((Activity) context).finish();
         });
         addView(back);
     }
@@ -96,7 +100,7 @@ public class CommonToolBar extends FrameLayout {
         TextView title = new TextView(context);
         FrameLayout.LayoutParams params = new LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
-                DensityUtil.INSTANCE.dp2px(42)
+                DensityUtil.INSTANCE.dp2px(HEIGHT)
         );
         params.gravity = Gravity.CENTER;
         title.setLayoutParams(params);

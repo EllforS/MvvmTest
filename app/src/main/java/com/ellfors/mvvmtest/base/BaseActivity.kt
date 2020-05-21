@@ -17,6 +17,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, getLayout)
+        mBinding.lifecycleOwner = this  //妈的，不加这句无法刷新UI
 
         initData()
         observerUI()

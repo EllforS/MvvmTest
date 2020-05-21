@@ -2,12 +2,16 @@ package com.ellfors.mvvmtest.biz.list
 
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseActivity
+import com.ellfors.mvvmtest.bean.ArticlesBean
 import com.ellfors.mvvmtest.databinding.ArticleBinding
 import com.ellfors.mvvmtest.vm.InjectUtils
+import com.ellfors.mvvmtest.vm.viewmodel.ArticleVM
 import com.ellfors.mvvmtest.widget.CommonToolBar
 
 /**
@@ -16,8 +20,12 @@ import com.ellfors.mvvmtest.widget.CommonToolBar
  */
 class MyArticleActivity : BaseActivity<ArticleBinding>(), CommonToolBar.CommonTopCallBack {
 
-    val mViewModel by lazy {
+    val mViewModel: ArticleVM by lazy {
         InjectUtils.injectArticleVM(this)
+    }
+
+    val mAdapter by lazy {
+        MyArticleAdapter(this)
     }
 
     companion object {
@@ -31,10 +39,14 @@ class MyArticleActivity : BaseActivity<ArticleBinding>(), CommonToolBar.CommonTo
 
     override fun initData() {
         mBinding.activity = this
-    }
+        mBinding.viewmodel = mViewModel
 
-    fun get() {
-        mViewModel.getArticles()
+        mBinding.rcvList.let {
+            it.layoutManager = LinearLayoutManager(this)
+            it.adapter = mAdapter
+        }
+
+        mBinding.refreshLayout.autoRefresh()
     }
 
     override fun onBackClick(view: View?) {
@@ -44,10 +56,10 @@ class MyArticleActivity : BaseActivity<ArticleBinding>(), CommonToolBar.CommonTo
     override fun observerUI() {
         mViewModel.let { vm ->
             vm.mArticles.observe(this, Observer {
-
-            })
-            vm.mException.observe(this, Observer {
-
+                if (vm.mPage == 1)
+                    mAdapter.setDatas(it)
+                else
+                    mAdapter.addDatas(it)
             })
         }
     }

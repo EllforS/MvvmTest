@@ -40,7 +40,8 @@ public class Girl {
     public Girl() {
     }
 
-    public Girl(String url) {
+    public Girl(String title, String url) {
+        this.title = title;
         this.url = url;
     }
 
@@ -148,5 +149,24 @@ public class Girl {
 
     public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "Girl{" +
+                "_id='" + _id + '\'' +
+                ", author='" + author + '\'' +
+                ", category='" + category + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", desc='" + desc + '\'' +
+                ", likeCounts=" + likeCounts +
+                ", publishedAt='" + publishedAt + '\'' +
+                ", stars=" + stars +
+                ", title='" + title + '\'' +
+                ", type='" + type + '\'' +
+                ", url='" + url + '\'' +
+                ", views=" + views +
+                ", images=" + images +
+                '}';
     }
 }
