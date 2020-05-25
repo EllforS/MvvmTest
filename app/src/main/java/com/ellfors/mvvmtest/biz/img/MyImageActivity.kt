@@ -39,6 +39,7 @@ class MyImageActivity : BaseActivity<ImageBinding>(), CommonToolBar.CommonTopCal
     override fun initData() {
         mBinding.vm = mViewModel
         observerUI()
+        mViewModel.refreshImage()
     }
 
     override fun onBackClick(view: View?) {

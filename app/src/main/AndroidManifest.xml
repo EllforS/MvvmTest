@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".biz.MainActivity">
+        <activity android:name=".biz.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,6 +26,8 @@
         <activity android:name=".biz.list.MyArticleActivity" />
 
         <activity android:name=".biz.time.TimeDownActivity" />
+
+        <activity android:name=".biz.edit.EditActivity" />
 
     </application>
 

@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.ellfors.mvvmtest.vm.repository.ArticleRepository
 import com.ellfors.mvvmtest.vm.repository.ImageRepository
 import com.ellfors.mvvmtest.vm.factory.ArticleVMFactory
+import com.ellfors.mvvmtest.vm.factory.EditVMFactory
 import com.ellfors.mvvmtest.vm.factory.ImageVMFactory
 import com.ellfors.mvvmtest.vm.factory.TimeDownVMFactory
 import com.ellfors.mvvmtest.vm.viewmodel.ArticleVM
+import com.ellfors.mvvmtest.vm.viewmodel.EditVM
 import com.ellfors.mvvmtest.vm.viewmodel.ImageVM
 import com.ellfors.mvvmtest.vm.viewmodel.TimeDownVM
 
@@ -27,5 +29,9 @@ object InjectUtils {
 
     fun injectTimeDownVM(owner: ViewModelStoreOwner): TimeDownVM {
         return ViewModelProvider(owner, TimeDownVMFactory()).get(TimeDownVM::class.java)
+    }
+
+    fun injectEditVM(owner: ViewModelStoreOwner): EditVM {
+        return ViewModelProvider(owner, EditVMFactory()).get(EditVM::class.java)
     }
 }
