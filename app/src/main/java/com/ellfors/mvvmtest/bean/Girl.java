@@ -154,19 +154,18 @@ public class Girl {
     @Override
     public String toString() {
         return "Girl{" +
-                "_id='" + _id + '\'' +
-                ", author='" + author + '\'' +
-                ", category='" + category + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", desc='" + desc + '\'' +
-                ", likeCounts=" + likeCounts +
-                ", publishedAt='" + publishedAt + '\'' +
-                ", stars=" + stars +
-                ", title='" + title + '\'' +
-                ", type='" + type + '\'' +
-                ", url='" + url + '\'' +
-                ", views=" + views +
-                ", images=" + images +
-                '}';
+                "_id='" + _id + '\n' +
+                ", author='" + author + '\n' +
+                ", category='" + category + '\n' +
+                ", createdAt='" + createdAt + '\n' +
+                ", desc='" + desc + '\n' +
+                ", likeCounts=" + likeCounts + '\n' +
+                ", publishedAt='" + publishedAt + '\n' +
+                ", stars=" + stars + '\n' +
+                ", title='" + title + '\n' +
+                ", type='" + type + '\n' +
+                ", url='" + url + '\n' +
+                ", views=" + views + '\n' +
+                ", images=" + images + '}';
     }
 }

@@ -1,10 +1,10 @@
 package com.ellfors.mvvmtest.biz.main
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ellfors.mvvmtest.R
+import com.ellfors.mvvmtest.base.BaseRcvAdp
 import com.ellfors.mvvmtest.biz.edit.EditActivity
 import com.ellfors.mvvmtest.biz.img.MyImageActivity
 import com.ellfors.mvvmtest.biz.list.MyArticleActivity
@@ -15,33 +15,29 @@ import com.ellfors.mvvmtest.databinding.ItemMainBinding
  * MainAdapter
  * 2020-05-25 11:30
  */
-class MainAdapter(val mContext: MainActivity) : RecyclerView.Adapter<MainAdapter.ItemViewHolder>() {
-
-    var mDatas = mutableListOf<String>()
+class MainAdapter(override val mContext: AppCompatActivity) : BaseRcvAdp<String>(mContext) {
 
     init {
         mDatas.add("图片")
         mDatas.add("列表")
         mDatas.add("倒计时")
         mDatas.add("输入")
+
+        setDatas(mDatas)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        return ItemViewHolder(DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.item_main, parent, false))
+    override fun onCreate(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return BaseViewHolder<ItemMainBinding>(buildBinding(parent, R.layout.item_main))
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.let {
-            it.binding.let { binding ->
-                binding.name = mDatas[position]
-                binding.adapter = this
-                binding.executePendingBindings()
-            }
+    @Suppress("UNCHECKED_CAST")
+    override fun onBind(holder: RecyclerView.ViewHolder, position: Int) {
+        val mHolder = holder as BaseViewHolder<ItemMainBinding>
+        mHolder.binding.let {
+            it.name = mDatas[position]
+            it.adapter = this
+            it.executePendingBindings()
         }
-    }
-
-    override fun getItemCount(): Int {
-        return mDatas.size
     }
 
     fun jump(type: String) {
@@ -56,6 +52,4 @@ class MainAdapter(val mContext: MainActivity) : RecyclerView.Adapter<MainAdapter
                 EditActivity.start(mContext)
         }
     }
-
-    class ItemViewHolder(val binding: ItemMainBinding) : RecyclerView.ViewHolder(binding.root)
 }

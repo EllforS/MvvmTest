@@ -3,6 +3,8 @@ package com.ellfors.mvvmtest.bindadp
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.ellfors.mvvmtest.R
 
 @BindingAdapter("loadImg")
 fun ImageView.loadImg(url: String?) {
@@ -10,6 +12,7 @@ fun ImageView.loadImg(url: String?) {
         Glide.with(context)
             .load(url)
             .centerInside()
+            .apply(RequestOptions.errorOf(R.drawable.common_empty))
             .into(this)
     }
 }
