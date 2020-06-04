@@ -3,16 +3,12 @@ package com.ellfors.mvvmtest.biz.img
 import android.content.Intent
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseActivity
-import com.ellfors.mvvmtest.bean.Girl
-import com.ellfors.mvvmtest.bindadp.loadImg
 import com.ellfors.mvvmtest.databinding.ImageBinding
-import com.ellfors.mvvmtest.vm.InjectUtils
+import com.ellfors.mvvmtest.vm.VMInjectUtil
 import com.ellfors.mvvmtest.vm.viewmodel.ImageVM
 import com.ellfors.mvvmtest.widget.CommonToolBar
 
@@ -23,7 +19,7 @@ import com.ellfors.mvvmtest.widget.CommonToolBar
 class MyImageActivity : BaseActivity<ImageBinding>(), CommonToolBar.CommonTopCallBack {
 
     private val mViewModel: ImageVM by lazy {
-        InjectUtils.injectImageVM(this)
+        VMInjectUtil.injectImageVM(this)
     }
 
     companion object {

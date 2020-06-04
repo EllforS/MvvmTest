@@ -2,11 +2,10 @@ package com.ellfors.mvvmtest.biz.time
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseActivity
 import com.ellfors.mvvmtest.databinding.TimeDownBinding
-import com.ellfors.mvvmtest.vm.InjectUtils
+import com.ellfors.mvvmtest.vm.VMInjectUtil
 import com.ellfors.mvvmtest.vm.viewmodel.TimeDownVM
 
 /**
@@ -16,7 +15,7 @@ import com.ellfors.mvvmtest.vm.viewmodel.TimeDownVM
 class TimeDownActivity : BaseActivity<TimeDownBinding>() {
 
     val mViewModel: TimeDownVM by lazy {
-        InjectUtils.injectTimeDownVM(this)
+        VMInjectUtil.injectTimeDownVM(this)
     }
 
     companion object {

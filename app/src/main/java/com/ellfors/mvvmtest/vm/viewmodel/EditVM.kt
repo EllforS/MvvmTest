@@ -1,6 +1,5 @@
 package com.ellfors.mvvmtest.vm.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.ellfors.mvvmtest.base.BaseViewModel
 

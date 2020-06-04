@@ -1,7 +1,7 @@
 package com.ellfors.mvvmtest.vm.factory
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import com.ellfors.mvvmtest.base.BaseViewModel
+import com.ellfors.mvvmtest.base.BaseViewModelFactory
 import com.ellfors.mvvmtest.vm.repository.ImageRepository
 import com.ellfors.mvvmtest.vm.viewmodel.ImageVM
 
@@ -11,8 +11,8 @@ import com.ellfors.mvvmtest.vm.viewmodel.ImageVM
  */
 @Suppress("UNCHECKED_CAST")
 class ImageVMFactory constructor(private val mMainRepository: ImageRepository) :
-    ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return ImageVM(mMainRepository) as T
-    }
+    BaseViewModelFactory() {
+
+    override val mViewModel: BaseViewModel
+        get() = ImageVM(mMainRepository)
 }

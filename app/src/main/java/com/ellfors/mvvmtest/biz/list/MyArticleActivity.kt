@@ -2,15 +2,13 @@ package com.ellfors.mvvmtest.biz.list
 
 import android.content.Intent
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseActivity
-import com.ellfors.mvvmtest.bean.ArticlesBean
 import com.ellfors.mvvmtest.databinding.ArticleBinding
-import com.ellfors.mvvmtest.vm.InjectUtils
+import com.ellfors.mvvmtest.vm.VMInjectUtil
 import com.ellfors.mvvmtest.vm.viewmodel.ArticleVM
 import com.ellfors.mvvmtest.widget.CommonToolBar
 
@@ -21,7 +19,7 @@ import com.ellfors.mvvmtest.widget.CommonToolBar
 class MyArticleActivity : BaseActivity<ArticleBinding>(), CommonToolBar.CommonTopCallBack {
 
     val mViewModel: ArticleVM by lazy {
-        InjectUtils.injectArticleVM(this)
+        VMInjectUtil.injectArticleVM(this)
     }
 
     val mAdapter by lazy {
@@ -38,6 +36,7 @@ class MyArticleActivity : BaseActivity<ArticleBinding>(), CommonToolBar.CommonTo
         get() = R.layout.activity_article
 
     override fun initData() {
+        setTargetView(mBinding.rcvList)
         mBinding.activity = this
         mBinding.viewmodel = mViewModel
 
@@ -60,6 +59,12 @@ class MyArticleActivity : BaseActivity<ArticleBinding>(), CommonToolBar.CommonTo
                     mAdapter.setDatas(it)
                 else
                     mAdapter.addDatas(it)
+            })
+            vm.mException.observe(this, Observer {
+                if (it.errorCode == -1)
+                    showNetError()
+                else
+                    showContent()
             })
         }
     }

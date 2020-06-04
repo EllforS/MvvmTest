@@ -1,7 +1,7 @@
 package com.ellfors.mvvmtest.vm.factory
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import com.ellfors.mvvmtest.base.BaseViewModel
+import com.ellfors.mvvmtest.base.BaseViewModelFactory
 import com.ellfors.mvvmtest.vm.repository.ArticleRepository
 import com.ellfors.mvvmtest.vm.viewmodel.ArticleVM
 
@@ -10,8 +10,8 @@ import com.ellfors.mvvmtest.vm.viewmodel.ArticleVM
  * 2020-05-19 14:54
  */
 class ArticleVMFactory constructor(private val mRepository: ArticleRepository) :
-    ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return ArticleVM(mRepository) as T
-    }
+    BaseViewModelFactory() {
+
+    override val mViewModel: BaseViewModel
+        get() = ArticleVM(mRepository)
 }

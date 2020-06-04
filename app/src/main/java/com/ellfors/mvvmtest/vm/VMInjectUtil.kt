@@ -17,7 +17,7 @@ import com.ellfors.mvvmtest.vm.viewmodel.TimeDownVM
  * InjectUtils
  * 2020-05-06 15:40
  */
-object InjectUtils {
+object VMInjectUtil {
 
     fun injectImageVM(owner: ViewModelStoreOwner): ImageVM {
         return ViewModelProvider(owner, ImageVMFactory(ImageRepository.getInstance())).get(ImageVM::class.java)

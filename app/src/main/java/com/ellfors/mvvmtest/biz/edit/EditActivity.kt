@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseActivity
 import com.ellfors.mvvmtest.databinding.EditBinding
-import com.ellfors.mvvmtest.vm.InjectUtils
+import com.ellfors.mvvmtest.vm.VMInjectUtil
 import com.ellfors.mvvmtest.vm.viewmodel.EditVM
 
 /**
@@ -15,7 +15,7 @@ import com.ellfors.mvvmtest.vm.viewmodel.EditVM
 class EditActivity : BaseActivity<EditBinding>() {
 
     val mViewModel: EditVM by lazy {
-        InjectUtils.injectEditVM(this)
+        VMInjectUtil.injectEditVM(this)
     }
 
     companion object {

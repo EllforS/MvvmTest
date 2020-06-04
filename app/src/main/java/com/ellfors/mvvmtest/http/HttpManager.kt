@@ -36,7 +36,7 @@ class HttpManager {
     fun <T> getGsonHttpApi(clz: Class<T>): T {
         return Retrofit.Builder()
             .client(okHttpClientBuilder.build())
-            .baseUrl("https://gank.io/")
+            .baseUrl("https://gank.io")
             .addConverterFactory(GsonConverterFactory.create())
 //            .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()

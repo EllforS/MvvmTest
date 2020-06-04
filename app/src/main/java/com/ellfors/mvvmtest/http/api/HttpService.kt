@@ -12,10 +12,10 @@ import retrofit2.http.Path
  */
 interface HttpService {
 
-    @GET("https://gank.io/api/v2/random/category/Girl/type/Girl/count/1")
+    @GET("/api/v2/random/category/Girl/type/Girl/count/1")
     suspend fun refreshImage(): BaseResponse<MutableList<Girl>>
 
-    @GET("https://gank.io/api/v2/data/category/GanHuo/type/Android/page/{page}/count/10")
+    @GET("/api/v2/data/category/GanHuo/type/Android/page/{page}/count/10")
     suspend fun getArticles(
         @Path("page") path: Int
     ): BaseResponse<MutableList<ArticlesBean>>

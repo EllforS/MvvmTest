@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
  * BaseFragment
  * 2020-04-15 12:11
  */
-abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding> : BaseEmptyFragment() {
 
     lateinit var mBinding: T
 
