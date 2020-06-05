@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseActivity
 import com.ellfors.mvvmtest.databinding.ArticleDetBinding
+import com.ellfors.mvvmtest.widget.CommonToolBar
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
@@ -17,7 +18,7 @@ import com.tencent.smtt.sdk.WebViewClient
  * MyArticleDetActivity
  * 2020-06-05 17:18
  */
-class MyArticleDetActivity : BaseActivity<ArticleDetBinding>() {
+class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.CommonTopCallBack {
 
     companion object {
         fun start(activity: AppCompatActivity, url: String?) {
@@ -127,5 +128,9 @@ class MyArticleDetActivity : BaseActivity<ArticleDetBinding>() {
             }
         }
         return true
+    }
+
+    override fun onBackClick(view: View?) {
+        onKeyDown(KeyEvent.KEYCODE_BACK, null)
     }
 }
