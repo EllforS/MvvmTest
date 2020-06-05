@@ -100,6 +100,4 @@ abstract class BaseRcvAdp<T : Any>(open val mContext: AppCompatActivity) : Recyc
     abstract fun onCreate(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
 
     abstract fun onBind(holder: RecyclerView.ViewHolder, position: Int)
-
-    class BaseViewHolder<T : ViewDataBinding>(val binding: T) : RecyclerView.ViewHolder(binding.root)
 }

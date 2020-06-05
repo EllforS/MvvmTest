@@ -2,10 +2,10 @@ package com.ellfors.mvvmtest.biz.list
 
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseRcvAdp
+import com.ellfors.mvvmtest.base.BaseViewHolder
 import com.ellfors.mvvmtest.bean.ArticlesBean
 import com.ellfors.mvvmtest.databinding.ArticleItemBinding
 
@@ -26,10 +26,16 @@ class MyArticleAdapter(override val mContext: AppCompatActivity) : BaseRcvAdp<Ar
             is BaseViewHolder<*> -> {
                 (holder as BaseViewHolder<ArticleItemBinding>).binding.let {
                     it.lifecycleOwner = mContext
+                    it.adp = this
                     it.article = mDatas[position]
                     it.executePendingBindings()//解决databinding闪烁问题
                 }
             }
         }
     }
+
+    fun toDetail(url: String?) {
+        MyArticleDetActivity.start(mContext, url)
+    }
+
 }

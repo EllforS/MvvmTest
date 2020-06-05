@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseRcvAdp
+import com.ellfors.mvvmtest.base.BaseViewHolder
 import com.ellfors.mvvmtest.biz.edit.EditActivity
 import com.ellfors.mvvmtest.biz.img.MyImageActivity
 import com.ellfors.mvvmtest.biz.list.MyArticleActivity

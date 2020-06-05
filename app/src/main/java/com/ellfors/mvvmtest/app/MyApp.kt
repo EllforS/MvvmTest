@@ -7,6 +7,7 @@ import com.ellfors.mvvmtest.R
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.tencent.smtt.sdk.QbSdk
 
 /**
  * MyApp
@@ -22,7 +23,12 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
+        initX5WebView()
         initRefreshLayout()
+    }
+
+    private fun initX5WebView() {
+        QbSdk.initX5Environment(applicationContext, null)
     }
 
     /**

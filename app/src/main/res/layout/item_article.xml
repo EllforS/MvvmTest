@@ -8,6 +8,10 @@
             name="article"
             type="com.ellfors.mvvmtest.bean.ArticlesBean" />
 
+        <variable
+            name="adp"
+            type="com.ellfors.mvvmtest.biz.list.MyArticleAdapter" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +19,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/common_bg">
+        android:background="@color/common_bg"
+        android:onClick="@{()->adp.toDetail(article.url)}">
 
         <TextView
             android:id="@+id/tv_text"

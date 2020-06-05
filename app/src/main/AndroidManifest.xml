@@ -3,6 +3,7 @@
     package="com.ellfors.mvvmtest">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".app.MyApp"
@@ -24,6 +25,8 @@
         <activity android:name=".biz.img.MyImageActivity" />
 
         <activity android:name=".biz.list.MyArticleActivity" />
+
+        <activity android:name=".biz.list.MyArticleDetActivity" />
 
         <activity android:name=".biz.time.TimeDownActivity" />
 
