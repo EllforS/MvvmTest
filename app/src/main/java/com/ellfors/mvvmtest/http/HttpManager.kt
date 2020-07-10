@@ -1,7 +1,11 @@
 package com.ellfors.mvvmtest.http
 
+import android.util.Log
 import com.ellfors.mvvmtest.http.interceptor.ResponseAddUrlInterceptor
+import com.ellfors.mvvmtest.utils.HttpLogUtil
+import com.orhanobut.logger.Logger
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -26,8 +30,14 @@ class HttpManager {
     private var okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
 
     init {
+        val loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
+            HttpLogUtil.log("HttpTag", it)
+        })
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
         okHttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS)
         okHttpClientBuilder.addInterceptor(ResponseAddUrlInterceptor())
+        okHttpClientBuilder.addInterceptor(loggingInterceptor)
     }
 
     /**

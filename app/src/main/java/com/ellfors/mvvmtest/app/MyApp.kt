@@ -3,11 +3,17 @@ package com.ellfors.mvvmtest.app
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import com.ellfors.mvvmtest.BuildConfig
 import com.ellfors.mvvmtest.R
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.FormatStrategy
+import com.orhanobut.logger.Logger
+import com.orhanobut.logger.PrettyFormatStrategy
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.tencent.smtt.sdk.QbSdk
+
 
 /**
  * MyApp
@@ -23,8 +29,24 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
+        initLogger()
         initX5WebView()
         initRefreshLayout()
+    }
+
+    private fun initLogger() {
+        val formatStrategy = PrettyFormatStrategy.newBuilder()
+            .showThreadInfo(false)  //不显示线程信息
+            .methodCount(0)         //打印方法行数
+            .methodOffset(0)        //偏移量
+            .tag("HttpTag")         //打印的TAG
+            .build()
+        Logger.addLogAdapter(object : AndroidLogAdapter(formatStrategy) {
+            override fun isLoggable(priority: Int, tag: String?): Boolean {
+                //仅Debug模式打印
+                return BuildConfig.DEBUG
+            }
+        })
     }
 
     private fun initX5WebView() {
