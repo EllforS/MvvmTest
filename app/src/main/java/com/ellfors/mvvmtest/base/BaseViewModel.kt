@@ -32,6 +32,7 @@ open class BaseViewModel : ViewModel() {
                 { withContext(Dispatchers.IO) { block() } },
                 { res ->
                     executeResponse(res) { success(it) }
+                    mException.postValue(BaseException())
                 },
                 {
                     error(it)
@@ -65,6 +66,7 @@ open class BaseViewModel : ViewModel() {
                         else
                             throw Exception("这里是Msg")
                     }
+                    mException.postValue(BaseException())
                 },
                 {
                     error(it)
@@ -104,7 +106,10 @@ open class BaseViewModel : ViewModel() {
             try {
                 success(block())
             } catch (e: Exception) {
-                error(BaseException(e))
+                if (e is BaseException)
+                    error(e)
+                else
+                    error(BaseException(e.message, -100))
             } finally {
                 complete()
             }

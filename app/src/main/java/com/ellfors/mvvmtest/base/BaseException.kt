@@ -24,17 +24,4 @@ class BaseException : IOException {
         this.url = url
         data = null
     }
-
-    constructor(t: Exception?) : super(t?.message) {
-        this.errorCode = -100
-        this.url = ""
-        this.data = null
-    }
-
-    constructor(t: Throwable?) : super(t?.message) {
-        this.errorCode = -100
-        this.url = ""
-        this.data = null
-    }
-
 }
