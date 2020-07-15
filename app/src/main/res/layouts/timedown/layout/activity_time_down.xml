@@ -2,11 +2,11 @@
 <layout
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data class="ArticleDetBinding">
+    <data class="TimeDownBinding">
 
         <variable
-            name="url"
-            type="String" />
+            name="viewModel"
+            type="com.ellfors.mvvmtest.vm.viewmodel.TimeDownVM" />
 
     </data>
 
@@ -23,27 +23,28 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="详情" />
+            app:toolbar_title="倒计时" />
 
-        <ProgressBar
-            android:id="@+id/progress"
-            style="@style/ProgressBar_Mini"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tv_show"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:progress="0"
+            android:text="@{viewModel.MTime}"
+            app:layout_constraintBottom_toTopOf="@+id/btn_down"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <com.tencent.smtt.sdk.WebView
-            android:id="@+id/webview"
-            loadUrl="@{url}"
+        <Button
+            android:id="@+id/btn_down"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.btnEnable}"
+            android:onClick="@{()->viewModel.startTimeDown()}"
+            android:text="开始"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/progress" />
+            app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

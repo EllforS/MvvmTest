@@ -1,5 +1,6 @@
 package com.ellfors.mvvmtest.base
 
+import android.text.TextUtils
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,7 +38,8 @@ open class BaseViewModel : ViewModel() {
                 {
                     error(it)
                     mException.postValue(it)
-                    Toast.makeText(MyApp.context, it.message, Toast.LENGTH_SHORT).show()
+                    if (!it.message.isNullOrEmpty())
+                        Toast.makeText(MyApp.context, it.message, Toast.LENGTH_SHORT).show()
                 },
                 {
                     complete()
@@ -71,7 +73,8 @@ open class BaseViewModel : ViewModel() {
                 {
                     error(it)
                     mException.postValue(it)
-                    Toast.makeText(MyApp.context, it.message, Toast.LENGTH_SHORT).show()
+                    if (!it.message.isNullOrEmpty())
+                        Toast.makeText(MyApp.context, it.message, Toast.LENGTH_SHORT).show()
                 },
                 {
                     complete()

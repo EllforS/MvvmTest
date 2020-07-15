@@ -3,12 +3,12 @@ package com.ellfors.mvvmtest.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.ellfors.mvvmtest.R;
-import com.ellfors.mvvmtest.utils.DensityUtil;
 
 /**
  * CommonToolBar
@@ -24,10 +23,8 @@ import com.ellfors.mvvmtest.utils.DensityUtil;
  */
 public class CommonToolBar extends FrameLayout {
 
-    private static final Integer HEIGHT = 48;
-    private String mTitleStr;
-
-    private CommonTopCallBack mCallBack;
+    private NormalToolBarListener mNormalListener;
+    private SearchToolBarListener mSearchListener;
 
     public CommonToolBar(@NonNull Context context) {
         super(context);
@@ -39,101 +36,128 @@ public class CommonToolBar extends FrameLayout {
         init(context, attrs);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        int mParentHeight = MeasureSpec.getSize(heightMeasureSpec);
-        int mParentWidth = MeasureSpec.getSize(widthMeasureSpec);
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int width;
-        int height;
-
-        if (widthMode == MeasureSpec.EXACTLY)
-            width = mParentWidth;
-        else
-            width = DensityUtil.INSTANCE.dp2px(360);
-        if (heightMode == MeasureSpec.EXACTLY)
-            height = mParentHeight;
-        else
-            height = DensityUtil.INSTANCE.dp2px(HEIGHT);
-        setMeasuredDimension(width, height);
-        setBackgroundColor(Color.WHITE);
-    }
-
     private void init(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CommonToolBar);
-        mTitleStr = typedArray.getString(R.styleable.CommonToolBar_title);
+        int mType = typedArray.getInteger(R.styleable.CommonToolBar_toolbar_type, 1);
+        switch (mType) {
+            case 1:
+                initNormal(context, typedArray);
+                break;
+            case 2:
+                initSearch(context, typedArray);
+                break;
+        }
         typedArray.recycle();
-
-        buildBackView(context);
-        buildTitleView(context);
-        buildBottomLine(context);
-        if (context instanceof CommonTopCallBack)
-            mCallBack = (CommonTopCallBack) context;
+        if (context instanceof NormalToolBarListener)
+            mNormalListener = (NormalToolBarListener) context;
+        if (context instanceof SearchToolBarListener)
+            mSearchListener = (SearchToolBarListener) context;
     }
 
-    private void buildBackView(Context context) {
-        TextView back = new TextView(context);
-        FrameLayout.LayoutParams params = new LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                DensityUtil.INSTANCE.dp2px(HEIGHT)
-        );
-        params.gravity = Gravity.START | Gravity.CENTER_VERTICAL;
-        back.setLayoutParams(params);
-        back.setPadding(DensityUtil.INSTANCE.dp2px(10), 0, DensityUtil.INSTANCE.dp2px(10), 0);
-        back.setText("返回");
-        back.getPaint().setTextSize(DensityUtil.INSTANCE.sp2px(14));
-        back.setTextColor(context.getResources().getColor(R.color.color_333333));
-        back.setGravity(Gravity.CENTER);
-        back.setOnClickListener(view -> {
-            if (mCallBack != null)
-                mCallBack.onBackClick(view);
+    private void initNormal(Context context, TypedArray typedArray) {
+        View mParent = inflate(getContext(), R.layout.layout_toolbar_normal, this);
+        String mTitleStr = typedArray.getString(R.styleable.CommonToolBar_toolbar_title);
+        String mPositive = typedArray.getString(R.styleable.CommonToolBar_toolbar_positive);
+
+        TextView tv_back = mParent.findViewById(R.id.tv_back);
+        TextView tv_title = mParent.findViewById(R.id.tv_title);
+        TextView tv_right = mParent.findViewById(R.id.tv_right);
+
+        tv_title.setText(TextUtils.isEmpty(mTitleStr) ? "" : mTitleStr);
+        tv_back.setOnClickListener(view -> {
+            if (mNormalListener != null)
+                mNormalListener.onBackClick(view);
             else if (context instanceof Activity)
                 ((Activity) context).finish();
         });
-        addView(back);
+        tv_right.setText(TextUtils.isEmpty(mPositive) ? "" : mPositive);
+        tv_right.setVisibility(TextUtils.isEmpty(mPositive) ? GONE : VISIBLE);
+        tv_right.setOnClickListener(view -> {
+            if (mNormalListener != null)
+                mNormalListener.onPositiveClick(view);
+        });
     }
 
-    private void buildTitleView(Context context) {
-        TextView title = new TextView(context);
-        FrameLayout.LayoutParams params = new LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                DensityUtil.INSTANCE.dp2px(HEIGHT)
-        );
-        params.gravity = Gravity.CENTER;
-        title.setLayoutParams(params);
-        title.setText(TextUtils.isEmpty(mTitleStr) ? "" : mTitleStr);
-        title.getPaint().setTextSize(DensityUtil.INSTANCE.sp2px(16));
-        title.setTextColor(context.getResources().getColor(R.color.color_333333));
-        title.setGravity(Gravity.CENTER);
-        addView(title);
-    }
+    private void initSearch(Context context, TypedArray typedArray) {
+        View mParent = inflate(getContext(), R.layout.layout_toolbar_search, this);
 
-    private void buildBottomLine(Context context) {
-        View view = new View(context);
-        FrameLayout.LayoutParams params = new LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                1
-        );
-        params.gravity = Gravity.BOTTOM;
-        view.setLayoutParams(params);
-        view.setBackgroundColor(context.getResources().getColor(R.color.tra_black_10));
-        addView(view);
+        String mPositive = typedArray.getString(R.styleable.CommonToolBar_toolbar_positive);
+
+        TextView tv_back = mParent.findViewById(R.id.tv_back);
+        EditText et_search = mParent.findViewById(R.id.et_search);
+        FrameLayout fl_clear_search = mParent.findViewById(R.id.fl_clear_search);
+        TextView tv_right = mParent.findViewById(R.id.tv_right);
+
+        et_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                fl_clear_search.setVisibility(TextUtils.isEmpty(s.toString()) ? View.GONE : View.VISIBLE);
+            }
+        });
+        et_search.setOnEditorActionListener((v, actionId, event) -> {
+            String str = et_search.getText().toString().trim();
+            if (TextUtils.isEmpty(str))
+                return false;
+            if (mSearchListener != null)
+                mSearchListener.onSearch(str);
+            return false;
+        });
+        fl_clear_search.setOnClickListener(view -> {
+            et_search.setText("");
+            if (mSearchListener != null)
+                mSearchListener.onClearSearch(view);
+        });
+        tv_right.setText(TextUtils.isEmpty(mPositive) ? "搜索" : mPositive);
+        tv_right.setOnClickListener(view -> {
+            String str = et_search.getText().toString().trim();
+            if (TextUtils.isEmpty(str))
+                return;
+            if (mSearchListener != null)
+                mSearchListener.onSearch(str);
+        });
+        tv_back.setOnClickListener(view -> {
+            if (mSearchListener != null)
+                mSearchListener.onBackClick(view);
+            else if (context instanceof Activity)
+                ((Activity) context).finish();
+        });
     }
 
     /*
      ************************************ 外部方法与接口 ********************************
      */
-    public interface CommonTopCallBack {
+    public interface NormalToolBarListener {
         void onBackClick(View view);
+
+        void onPositiveClick(View view);
+    }
+
+    public interface SearchToolBarListener {
+        void onBackClick(View view);
+
+        void onSearch(String str);
+
+        void onClearSearch(View view);
     }
 
     /**
      * Fragment无法自动绑定，需要调用Bind方法
      */
-    public void bind(CommonTopCallBack back) {
-        this.mCallBack = back;
+    public void bind(NormalToolBarListener listener) {
+        this.mNormalListener = listener;
+    }
+
+    public void bind(SearchToolBarListener listener) {
+        this.mSearchListener = listener;
     }
 }

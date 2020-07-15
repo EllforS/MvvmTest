@@ -24,7 +24,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="输入" />
+            app:toolbar_title="输入" />
 
         <EditText
             android:id="@+id/et_username"

@@ -2,6 +2,11 @@
 <resources>
 
     <declare-styleable name="CommonToolBar">
-        <attr name="title" format="string" />
+        <attr name="toolbar_type" format="enum">
+            <enum name="normal" value="1" />
+            <enum name="search" value="2" />
+        </attr>
+        <attr name="toolbar_title" format="string" />
+        <attr name="toolbar_positive" format="string" />
     </declare-styleable>
 </resources>

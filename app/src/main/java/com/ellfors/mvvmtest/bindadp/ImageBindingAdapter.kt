@@ -12,7 +12,7 @@ fun ImageView.loadImg(url: String?) {
         Glide.with(context)
             .load(url)
             .centerInside()
-            .apply(RequestOptions.errorOf(R.drawable.common_empty))
+            .apply(RequestOptions.errorOf(R.drawable.ic_common_empty))
             .into(this)
     }
 }

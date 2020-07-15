@@ -10,7 +10,7 @@
         android:id="@+id/iv_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/common_empty" />
+        android:src="@drawable/ic_common_empty" />
 
     <TextView
         android:id="@+id/tv_tips"

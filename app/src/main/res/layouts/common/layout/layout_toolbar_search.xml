@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:drawableStart="@drawable/ic_toolbar_back"
+        android:includeFontPadding="false"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/color_333333"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_search_bg"
+        android:layout_width="0dp"
+        android:layout_height="29dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/shape_toolbar_search_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_back"
+        app:layout_constraintRight_toLeftOf="@id/tv_right"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="30dp"
+        android:background="@null"
+        android:drawableStart="@drawable/ic_toolbar_search"
+        android:drawablePadding="5dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:hint="请输入"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
+        android:singleLine="true"
+        android:textColor="@color/color_333333"
+        android:textColorHint="@color/color_cccccc"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="@id/view_search_bg"
+        app:layout_constraintLeft_toLeftOf="@id/view_search_bg"
+        app:layout_constraintRight_toRightOf="@id/view_search_bg"
+        app:layout_constraintTop_toTopOf="@id/view_search_bg" />
+
+    <FrameLayout
+        android:id="@+id/fl_clear_search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/view_search_bg"
+        app:layout_constraintLeft_toRightOf="@id/et_search"
+        app:layout_constraintRight_toRightOf="@id/view_search_bg"
+        app:layout_constraintTop_toTopOf="@id/view_search_bg">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_toolbar_search_close" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="搜索"
+        android:textColor="@color/color_333333"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:background="@color/tra_black_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@ import com.tencent.smtt.sdk.WebViewClient
  * MyArticleDetActivity
  * 2020-06-05 17:18
  */
-class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.CommonTopCallBack {
+class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.NormalToolBarListener {
 
     companion object {
         fun start(activity: AppCompatActivity, url: String?) {
@@ -132,5 +132,8 @@ class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.Co
 
     override fun onBackClick(view: View?) {
         onKeyDown(KeyEvent.KEYCODE_BACK, null)
+    }
+
+    override fun onPositiveClick(view: View?) {
     }
 }

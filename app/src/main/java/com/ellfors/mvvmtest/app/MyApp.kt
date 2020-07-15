@@ -6,7 +6,6 @@ import android.content.Context
 import com.ellfors.mvvmtest.BuildConfig
 import com.ellfors.mvvmtest.R
 import com.orhanobut.logger.AndroidLogAdapter
-import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -92,8 +91,8 @@ class MyApp : Application() {
                 .setDrawableMarginRight(7F)//文字与图片间距
                 .setFinishDuration(0)//显示刷新完成的持续时间
                 .setAccentColor(resources.getColor(R.color.color_333333))//文字颜色
-                .setArrowDrawable(resources.getDrawable(R.drawable.refresh_pull_icon))//箭头图片
-                .setProgressDrawable(resources.getDrawable(R.drawable.refresh_loading_icon))//进度图片
+                .setArrowDrawable(resources.getDrawable(R.drawable.ic_refresh_pull))//箭头图片
+                .setProgressDrawable(resources.getDrawable(R.drawable.ic_refresh_loading))//进度图片
         }
         //设置全局Footer构建器
         SmartRefreshLayout.setDefaultRefreshFooterCreator { _, _ ->
@@ -102,8 +101,8 @@ class MyApp : Application() {
                 .setDrawableMarginRight(7F) //文字与图片间距
                 .setFinishDuration(0) //显示刷新完成的持续时间
                 .setAccentColor(resources.getColor(R.color.color_333333)) //文字颜色
-                .setArrowDrawable(resources.getDrawable(R.drawable.refresh_pull_icon)) //箭头图片
-                .setProgressDrawable(resources.getDrawable(R.drawable.refresh_loading_icon)) //进度图片
+                .setArrowDrawable(resources.getDrawable(R.drawable.ic_refresh_pull)) //箭头图片
+                .setProgressDrawable(resources.getDrawable(R.drawable.ic_refresh_loading)) //进度图片
         }
     }
 

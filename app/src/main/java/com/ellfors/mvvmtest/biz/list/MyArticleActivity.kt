@@ -1,7 +1,6 @@
 package com.ellfors.mvvmtest.biz.list
 
 import android.content.Intent
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,13 +9,12 @@ import com.ellfors.mvvmtest.base.BaseActivity
 import com.ellfors.mvvmtest.databinding.ArticleBinding
 import com.ellfors.mvvmtest.vm.VMInjectUtil
 import com.ellfors.mvvmtest.vm.viewmodel.ArticleVM
-import com.ellfors.mvvmtest.widget.CommonToolBar
 
 /**
  * ListActivity
  * 2020-05-19 12:19
  */
-class MyArticleActivity : BaseActivity<ArticleBinding>(), CommonToolBar.CommonTopCallBack {
+class MyArticleActivity : BaseActivity<ArticleBinding>() {
 
     val mViewModel: ArticleVM by lazy {
         VMInjectUtil.injectArticleVM(this)
@@ -46,10 +44,6 @@ class MyArticleActivity : BaseActivity<ArticleBinding>(), CommonToolBar.CommonTo
         }
 
         mBinding.refreshLayout.autoRefresh()
-    }
-
-    override fun onBackClick(view: View?) {
-        finish()
     }
 
     override fun observerUI() {
