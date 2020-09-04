@@ -106,8 +106,6 @@ public class CommonToolBar extends FrameLayout {
         });
         et_search.setOnEditorActionListener((v, actionId, event) -> {
             String str = et_search.getText().toString().trim();
-            if (TextUtils.isEmpty(str))
-                return false;
             if (mSearchListener != null)
                 mSearchListener.onSearch(str);
             return false;
@@ -120,8 +118,6 @@ public class CommonToolBar extends FrameLayout {
         tv_right.setText(TextUtils.isEmpty(mPositive) ? "搜索" : mPositive);
         tv_right.setOnClickListener(view -> {
             String str = et_search.getText().toString().trim();
-            if (TextUtils.isEmpty(str))
-                return;
             if (mSearchListener != null)
                 mSearchListener.onSearch(str);
         });
