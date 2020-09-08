@@ -11,4 +11,5 @@
     <color name="color_333333">#333333</color>
     <color name="color_ff6633">#ff6633</color>
     <color name="tra_black_10">#1A000000</color>
+    <color name="tra_black_70">#B3000000</color>
 </resources>

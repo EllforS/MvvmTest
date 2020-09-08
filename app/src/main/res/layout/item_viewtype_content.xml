@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <data class="ArticleItemBinding">
+    <data>
 
         <variable
-            name="article"
-            type="com.ellfors.mvvmtest.bean.ArticlesBean" />
+            name="contentBean"
+            type="com.ellfors.mvvmtest.biz.viewtype.ViewTypeContentBean" />
 
         <variable
             name="adp"
-            type="com.ellfors.mvvmtest.biz.list.MyArticleAdapter" />
+            type="com.ellfors.mvvmtest.biz.viewtype.ViewTypeAdapter" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/common_bg"
-        android:onClick="@{()->adp.toDetail(article.url)}">
+        android:background="@color/selector_common_bg">
 
         <TextView
-            android:id="@+id/tv_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@{article.desc}"
+            android:onClick="@{()->adp.onContentClick(contentBean)}"
+            android:padding="5dp"
+            android:text="@{contentBean.content}"
             android:textColor="@color/color_333333"
-            android:textSize="14dp"
+            android:textSize="17dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="文字" />
+            tools:text="内容" />
 
         <View
             android:layout_width="0dp"

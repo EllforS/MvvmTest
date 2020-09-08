@@ -21,16 +21,12 @@ class MyArticleAdapter(override val mContext: AppCompatActivity) : BaseRcvAdp<Ar
 
     @Suppress("UNCHECKED_CAST")
     override fun onBind(holder: RecyclerView.ViewHolder, position: Int) {
-
-        when (holder) {
-            is BaseViewHolder<*> -> {
-                (holder as BaseViewHolder<ArticleItemBinding>).binding.let {
-                    it.lifecycleOwner = mContext
-                    it.adp = this
-                    it.article = mDatas[position]
-                    it.executePendingBindings()//解决databinding闪烁问题
-                }
-            }
+        val mHolder = holder as BaseViewHolder<ArticleItemBinding>
+        mHolder.binding.let {
+            it.lifecycleOwner = mContext
+            it.adp = this
+            it.article = mDatas[position]
+            it.executePendingBindings()//解决databinding闪烁问题
         }
     }
 

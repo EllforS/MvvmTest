@@ -36,6 +36,8 @@
 
         <activity android:name=".biz.edit.EditActivity" />
 
+        <activity android:name=".biz.viewtype.ViewTypeActivity" />
+
     </application>
 
 </manifest>

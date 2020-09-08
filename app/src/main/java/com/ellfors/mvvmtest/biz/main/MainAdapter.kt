@@ -10,7 +10,10 @@ import com.ellfors.mvvmtest.biz.edit.EditActivity
 import com.ellfors.mvvmtest.biz.img.MyImageActivity
 import com.ellfors.mvvmtest.biz.list.MyArticleActivity
 import com.ellfors.mvvmtest.biz.time.TimeDownActivity
+import com.ellfors.mvvmtest.biz.viewtype.ViewTypeActivity
 import com.ellfors.mvvmtest.databinding.ItemMainBinding
+import com.ellfors.mvvmtest.utils.NotificationUtil
+import com.ellfors.mvvmtest.utils.TsUtil
 
 /**
  * MainAdapter
@@ -23,6 +26,8 @@ class MainAdapter(override val mContext: AppCompatActivity) : BaseRcvAdp<String>
         mDatas.add("列表")
         mDatas.add("倒计时")
         mDatas.add("输入")
+        mDatas.add("ItemViewType")
+        mDatas.add("检查通知权限")
 
         setDatas(mDatas)
     }
@@ -51,6 +56,12 @@ class MainAdapter(override val mContext: AppCompatActivity) : BaseRcvAdp<String>
                 TimeDownActivity.start(mContext)
             mDatas[3] ->
                 EditActivity.start(mContext)
+            mDatas[4] ->
+                ViewTypeActivity.start(mContext)
+            mDatas[5] -> {
+                if (NotificationUtil.requsetNotificationPermission(mContext))
+                    TsUtil.showToast("已开启通知权限")
+            }
         }
     }
 }

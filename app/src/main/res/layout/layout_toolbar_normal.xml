@@ -10,6 +10,7 @@
         android:id="@+id/tv_back"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:background="@color/selector_common_bg"
         android:drawableStart="@drawable/ic_toolbar_back"
         android:includeFontPadding="false"
         android:paddingStart="10dp"

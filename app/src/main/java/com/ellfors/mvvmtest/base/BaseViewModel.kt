@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ellfors.mvvmtest.app.MyApp
 import com.ellfors.mvvmtest.bean.BaseResponse
+import com.ellfors.mvvmtest.utils.TsUtil
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -39,7 +40,7 @@ open class BaseViewModel : ViewModel() {
                     error(it)
                     mException.postValue(it)
                     if (!it.message.isNullOrEmpty())
-                        Toast.makeText(MyApp.context, it.message, Toast.LENGTH_SHORT).show()
+                        TsUtil.showToast(it.message)
                 },
                 {
                     complete()
@@ -74,7 +75,7 @@ open class BaseViewModel : ViewModel() {
                     error(it)
                     mException.postValue(it)
                     if (!it.message.isNullOrEmpty())
-                        Toast.makeText(MyApp.context, it.message, Toast.LENGTH_SHORT).show()
+                        TsUtil.showToast(it.message)
                 },
                 {
                     complete()
