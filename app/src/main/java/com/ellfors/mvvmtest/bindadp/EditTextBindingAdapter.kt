@@ -5,6 +5,7 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
+import com.ellfors.mvvmtest.biz.viewtype.ViewTypeContentBean
 
 /**
  * EditTextBindingAdapter
@@ -15,6 +16,23 @@ fun EditText.onTextChanged(text: MutableLiveData<String>) {
     addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(value: Editable?) {
             text.value = value?.toString() ?: ""
+        }
+
+        override fun beforeTextChanged(value: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+        }
+
+        override fun onTextChanged(value: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+        }
+    })
+}
+
+@BindingAdapter("onTextChanged")
+fun EditText.onTextChanged(bean: ViewTypeContentBean) {
+    addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(value: Editable?) {
+            bean.content = value?.toString() ?: ""
         }
 
         override fun beforeTextChanged(value: CharSequence?, p1: Int, p2: Int, p3: Int) {

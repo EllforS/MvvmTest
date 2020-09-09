@@ -6,8 +6,9 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 
 /**
- * SmartRefreshLayoutBindingAdapter
- * 2020-05-19 17:58
+ * requireAll = false
+ * 以指定不是每个属性都必须分配一个绑定表达式
+ * 就是不用写全也没关系
  */
 @BindingAdapter(value = ["onRefresh", "onLoadMore"], requireAll = false)
 fun SmartRefreshLayout.onRefreshLoadMore(onRefreshListener: OnRefreshListener?, onLoadMoreListener: OnLoadMoreListener?) {

@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="contentBean"
             type="com.ellfors.mvvmtest.biz.viewtype.ViewTypeContentBean" />
-
-        <variable
-            name="adp"
-            type="com.ellfors.mvvmtest.biz.viewtype.ViewTypeAdapter" />
 
     </data>
 
@@ -21,27 +16,31 @@
         android:layout_height="wrap_content"
         android:background="@color/selector_common_bg">
 
-        <TextView
+        <EditText
+            android:id="@+id/et_content"
+            onTextChanged="@{contentBean}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{()->adp.onContentClick(contentBean)}"
-            android:padding="5dp"
-            android:text="@{contentBean.content}"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/shape_toolbar_search_bg"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="@{contentBean.hint}"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:singleLine="true"
             android:textColor="@color/color_333333"
-            android:textSize="17dp"
+            android:textColorHint="@color/color_cccccc"
+            android:textSize="13dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="内容" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@color/tra_black_10"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,7 +1,12 @@
 package com.ellfors.mvvmtest.biz.viewtype
 
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseRcvAdp
@@ -10,6 +15,7 @@ import com.ellfors.mvvmtest.base.BaseViewHolder
 import com.ellfors.mvvmtest.databinding.ItemViewtypeContentBinding
 import com.ellfors.mvvmtest.databinding.ItemViewtypeTitleBinding
 import com.ellfors.mvvmtest.utils.TsUtil
+import java.lang.StringBuilder
 
 /**
  * TestAdapter
@@ -46,7 +52,6 @@ class ViewTypeAdapter(override val mContext: AppCompatActivity) : BaseRcvAdp<Bas
                 val mContentBean = mDatas[position].data as ViewTypeContentBean
                 mContentHolder.binding.run {
                     contentBean = mContentBean
-                    adp = this@ViewTypeAdapter
                 }
             }
         }
@@ -56,8 +61,14 @@ class ViewTypeAdapter(override val mContext: AppCompatActivity) : BaseRcvAdp<Bas
         TsUtil.showToast("${bean.title}点击...")
     }
 
-    fun onContentClick(bean: ViewTypeContentBean) {
-        TsUtil.showToast("${bean.content}点击!!!!")
+    fun logContentData(): String {
+        val builder = StringBuilder()
+        for (data in mDatas) {
+            if (data.data is ViewTypeContentBean) {
+                val content = data.data as ViewTypeContentBean
+                builder.append("${content.hint}：${content.content}\n")
+            }
+        }
+        return builder.toString()
     }
-
 }

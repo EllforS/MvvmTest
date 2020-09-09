@@ -18,7 +18,7 @@ import com.tencent.smtt.sdk.WebViewClient
  * MyArticleDetActivity
  * 2020-06-05 17:18
  */
-class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.NormalToolBarListener {
+class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.ToolBarNormalListener {
 
     companion object {
         fun start(activity: AppCompatActivity, url: String?) {

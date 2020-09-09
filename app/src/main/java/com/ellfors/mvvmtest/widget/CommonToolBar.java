@@ -23,8 +23,8 @@ import com.ellfors.mvvmtest.R;
  */
 public class CommonToolBar extends FrameLayout {
 
-    private NormalToolBarListener mNormalListener;
-    private SearchToolBarListener mSearchListener;
+    private ToolBarNormalListener mNormalListener;
+    private ToolBarSearchListener mSearchListener;
 
     public CommonToolBar(@NonNull Context context) {
         super(context);
@@ -48,10 +48,10 @@ public class CommonToolBar extends FrameLayout {
                 break;
         }
         typedArray.recycle();
-        if (context instanceof NormalToolBarListener)
-            mNormalListener = (NormalToolBarListener) context;
-        if (context instanceof SearchToolBarListener)
-            mSearchListener = (SearchToolBarListener) context;
+        if (context instanceof ToolBarNormalListener)
+            mNormalListener = (ToolBarNormalListener) context;
+        if (context instanceof ToolBarSearchListener)
+            mSearchListener = (ToolBarSearchListener) context;
     }
 
     private void initNormal(Context context, TypedArray typedArray) {
@@ -132,13 +132,13 @@ public class CommonToolBar extends FrameLayout {
     /*
      ************************************ 外部方法与接口 ********************************
      */
-    public interface NormalToolBarListener {
+    public interface ToolBarNormalListener {
         void onBackClick(View view);
 
         void onPositiveClick(View view);
     }
 
-    public interface SearchToolBarListener {
+    public interface ToolBarSearchListener {
         void onBackClick(View view);
 
         void onSearch(String str);
@@ -149,11 +149,11 @@ public class CommonToolBar extends FrameLayout {
     /**
      * Fragment无法自动绑定，需要调用Bind方法
      */
-    public void bind(NormalToolBarListener listener) {
+    public void bind(ToolBarNormalListener listener) {
         this.mNormalListener = listener;
     }
 
-    public void bind(SearchToolBarListener listener) {
+    public void bind(ToolBarSearchListener listener) {
         this.mSearchListener = listener;
     }
 }
