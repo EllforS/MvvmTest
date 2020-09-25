@@ -9,5 +9,5 @@ import com.ellfors.mvvmtest.http.api.HttpService
  */
 open class BaseRepository {
 
-    val getHttpService = HttpManager.getInstance().getGsonHttpApi(HttpService::class.java)
+    val getHttpService = HttpManager.instance.getGsonHttpApi(HttpService::class.java)
 }

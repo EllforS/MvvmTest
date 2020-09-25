@@ -1,9 +1,7 @@
 package com.ellfors.mvvmtest.http
 
-import android.util.Log
 import com.ellfors.mvvmtest.http.interceptor.ResponseAddUrlInterceptor
 import com.ellfors.mvvmtest.utils.HttpLogUtil
-import com.orhanobut.logger.Logger
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -16,15 +14,9 @@ import java.util.concurrent.TimeUnit
  */
 class HttpManager {
     companion object {
-        @Volatile
-        private var instance: HttpManager? = null
-
-        fun getInstance(): HttpManager =
-            instance ?: synchronized(this) {
-                instance ?: HttpManager().also {
-                    instance = it
-                }
-            }
+        val instance: HttpManager by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            HttpManager()
+        }
     }
 
     private var okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()

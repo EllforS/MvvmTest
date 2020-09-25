@@ -9,15 +9,9 @@ import com.ellfors.mvvmtest.base.BaseRepository
 class ImageRepository : BaseRepository() {
 
     companion object {
-        @Volatile
-        private var instance: ImageRepository? = null
-
-        fun getInstance(): ImageRepository =
-            instance ?: synchronized(this) {
-                instance ?: ImageRepository().also {
-                    instance = it
-                }
-            }
+        val instance: ImageRepository by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            ImageRepository()
+        }
     }
 
     suspend fun refreshImage() = getHttpService.refreshImage()

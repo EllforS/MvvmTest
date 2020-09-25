@@ -20,11 +20,11 @@ import com.ellfors.mvvmtest.vm.viewmodel.TimeDownVM
 object VMInjectUtil {
 
     fun injectImageVM(owner: ViewModelStoreOwner): ImageVM {
-        return ViewModelProvider(owner, ImageVMFactory(ImageRepository.getInstance())).get(ImageVM::class.java)
+        return ViewModelProvider(owner, ImageVMFactory(ImageRepository.instance)).get(ImageVM::class.java)
     }
 
     fun injectArticleVM(owner: ViewModelStoreOwner): ArticleVM {
-        return ViewModelProvider(owner, ArticleVMFactory(ArticleRepository.getInstance())).get(ArticleVM::class.java)
+        return ViewModelProvider(owner, ArticleVMFactory(ArticleRepository.instance)).get(ArticleVM::class.java)
     }
 
     fun injectTimeDownVM(owner: ViewModelStoreOwner): TimeDownVM {

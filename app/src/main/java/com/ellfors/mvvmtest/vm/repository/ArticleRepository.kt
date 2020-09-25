@@ -9,15 +9,9 @@ import com.ellfors.mvvmtest.base.BaseRepository
 class ArticleRepository : BaseRepository() {
 
     companion object {
-        @Volatile
-        private var instance: ArticleRepository? = null
-
-        fun getInstance(): ArticleRepository =
-            instance ?: synchronized(this) {
-                instance ?: ArticleRepository().also {
-                    instance = it
-                }
-            }
+        val instance: ArticleRepository by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            ArticleRepository()
+        }
     }
 
     suspend fun getArticles(page: Int) = getHttpService.getArticles(page)
