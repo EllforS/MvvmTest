@@ -28,6 +28,7 @@ class EditActivity : BaseActivity<EditBinding>() {
         get() = R.layout.activity_edit
 
     override fun initData() {
+        setEditTextTouchOutSide(true)
         mBinding.vm = mViewModel
     }
 

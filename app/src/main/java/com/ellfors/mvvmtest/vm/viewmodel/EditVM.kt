@@ -1,13 +1,13 @@
 package com.ellfors.mvvmtest.vm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.ellfors.mvvmtest.base.BaseViewModel
+import com.ellfors.mvvmtest.base.BaseVM
 
 /**
  * EditVM
  * 2020-05-25 12:05
  */
-class EditVM : BaseViewModel() {
+class EditVM : BaseVM() {
 
     val userName = MutableLiveData("")
     val passWord = MutableLiveData("")

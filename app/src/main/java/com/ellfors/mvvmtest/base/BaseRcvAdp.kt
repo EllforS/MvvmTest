@@ -25,7 +25,7 @@ abstract class BaseRcvAdp<T : Any>(open val mContext: AppCompatActivity) : Recyc
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        onBind(holder, position)
+        onBind(holder, mDatas[position], position)
     }
 
     override fun getItemCount(): Int {
@@ -93,11 +93,11 @@ abstract class BaseRcvAdp<T : Any>(open val mContext: AppCompatActivity) : Recyc
         mSpanList = Arrays.asList(*list)
     }
 
-    fun <T : ViewDataBinding> buildBinding(parent: ViewGroup, layoutID: Int): T {
-        return DataBindingUtil.inflate(LayoutInflater.from(mContext), layoutID, parent, false)
+    fun <T : ViewDataBinding> buildBinding(parent: ViewGroup, layoutID: Int): BaseVH<T> {
+        return BaseVH(DataBindingUtil.inflate(LayoutInflater.from(mContext), layoutID, parent, false))
     }
 
     abstract fun onCreate(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
 
-    abstract fun onBind(holder: RecyclerView.ViewHolder, position: Int)
+    abstract fun onBind(holder: RecyclerView.ViewHolder, bean: T, position: Int)
 }

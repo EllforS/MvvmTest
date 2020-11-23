@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseActivity
+import com.ellfors.mvvmtest.constant.MyCodes
 import com.ellfors.mvvmtest.databinding.ArticleBinding
 import com.ellfors.mvvmtest.vm.VMInjectUtil
 import com.ellfors.mvvmtest.vm.viewmodel.ArticleVM
@@ -38,9 +39,9 @@ class MyArticleActivity : BaseActivity<ArticleBinding>() {
         mBinding.activity = this
         mBinding.viewmodel = mViewModel
 
-        mBinding.rcvList.let {
-            it.layoutManager = LinearLayoutManager(this)
-            it.adapter = mAdapter
+        mBinding.rcvList.run {
+            layoutManager = LinearLayoutManager(this@MyArticleActivity)
+            adapter = mAdapter
         }
 
         mBinding.refreshLayout.autoRefresh()
@@ -55,7 +56,7 @@ class MyArticleActivity : BaseActivity<ArticleBinding>() {
                     mAdapter.addDatas(it)
             })
             vm.mException.observe(this, Observer {
-                if (it.errorCode == -1)
+                if (it.errorCode == MyCodes.HTTP_NET_ERROR)
                     showNetError()
                 else
                     showContent()

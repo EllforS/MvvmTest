@@ -1,13 +1,10 @@
 package com.ellfors.mvvmtest.base
 
-import android.text.TextUtils
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ellfors.mvvmtest.app.MyApp
 import com.ellfors.mvvmtest.bean.BaseResponse
-import com.ellfors.mvvmtest.utils.TsUtil
+import com.ellfors.mvvmtest.utils.ToastUtil
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -15,7 +12,7 @@ import java.lang.Exception
  * BaseViewModel
  * 2020-05-19 15:15
  */
-open class BaseViewModel : ViewModel() {
+open class BaseVM : ViewModel() {
 
     val mException = MutableLiveData<BaseException>()
 
@@ -40,7 +37,7 @@ open class BaseViewModel : ViewModel() {
                     error(it)
                     mException.postValue(it)
                     if (!it.message.isNullOrEmpty())
-                        TsUtil.showToast(it.message)
+                        ToastUtil.showToast(it.message)
                 },
                 {
                     complete()
@@ -75,7 +72,7 @@ open class BaseViewModel : ViewModel() {
                     error(it)
                     mException.postValue(it)
                     if (!it.message.isNullOrEmpty())
-                        TsUtil.showToast(it.message)
+                        ToastUtil.showToast(it.message)
                 },
                 {
                     complete()

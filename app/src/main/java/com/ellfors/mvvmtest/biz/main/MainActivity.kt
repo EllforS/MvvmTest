@@ -15,9 +15,9 @@ class MainActivity : BaseActivity<MainBinding>() {
         get() = R.layout.activity_main
 
     override fun initData() {
-        mBinding.rcvMain.let {
-            it.layoutManager = LinearLayoutManager(this)
-            it.adapter = MainAdapter(this)
+        mBinding.rcvMain.run {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = MainAdapter(this@MainActivity)
         }
     }
 

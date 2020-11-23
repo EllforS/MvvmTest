@@ -5,7 +5,7 @@ import android.text.TextWatcher
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
-import com.ellfors.mvvmtest.biz.viewtype.ViewTypeContentBean
+import com.ellfors.mvvmtest.bean.ViewTypeContentBean
 
 /**
  * EditTextBindingAdapter

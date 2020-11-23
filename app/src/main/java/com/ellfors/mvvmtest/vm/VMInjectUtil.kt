@@ -2,8 +2,8 @@ package com.ellfors.mvvmtest.vm
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.ellfors.mvvmtest.vm.repository.ArticleRepository
-import com.ellfors.mvvmtest.vm.repository.ImageRepository
+import com.ellfors.mvvmtest.vm.repository.ArticleRepo
+import com.ellfors.mvvmtest.vm.repository.ImageRepo
 import com.ellfors.mvvmtest.vm.factory.ArticleVMFactory
 import com.ellfors.mvvmtest.vm.factory.EditVMFactory
 import com.ellfors.mvvmtest.vm.factory.ImageVMFactory
@@ -20,11 +20,11 @@ import com.ellfors.mvvmtest.vm.viewmodel.TimeDownVM
 object VMInjectUtil {
 
     fun injectImageVM(owner: ViewModelStoreOwner): ImageVM {
-        return ViewModelProvider(owner, ImageVMFactory(ImageRepository.instance)).get(ImageVM::class.java)
+        return ViewModelProvider(owner, ImageVMFactory(ImageRepo.instance)).get(ImageVM::class.java)
     }
 
     fun injectArticleVM(owner: ViewModelStoreOwner): ArticleVM {
-        return ViewModelProvider(owner, ArticleVMFactory(ArticleRepository.instance)).get(ArticleVM::class.java)
+        return ViewModelProvider(owner, ArticleVMFactory(ArticleRepo.instance)).get(ArticleVM::class.java)
     }
 
     fun injectTimeDownVM(owner: ViewModelStoreOwner): TimeDownVM {

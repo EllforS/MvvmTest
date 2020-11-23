@@ -1,7 +1,7 @@
 package com.ellfors.mvvmtest.vm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.ellfors.mvvmtest.base.BaseViewModel
+import com.ellfors.mvvmtest.base.BaseVM
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.*
  * TimeDownVM
  * 2020-05-19 16:59
  */
-class TimeDownVM : BaseViewModel() {
+class TimeDownVM : BaseVM() {
 
     val mTime = MutableLiveData("")
     val btnEnable = MutableLiveData(true)

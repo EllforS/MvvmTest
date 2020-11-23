@@ -15,7 +15,7 @@ import com.ellfors.mvvmtest.app.MyApp
  * TsUtil
  * 2020-09-08 11:39
  */
-object TsUtil {
+object ToastUtil {
 
     private var mToast: Toast? = null
     private var mToastY = 0 // toast默认显示高度

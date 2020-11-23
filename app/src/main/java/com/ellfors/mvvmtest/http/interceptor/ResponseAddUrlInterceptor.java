@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.ellfors.mvvmtest.base.BaseException;
 import com.ellfors.mvvmtest.bean.BaseResponse;
+import com.ellfors.mvvmtest.constant.MyCodes;
 import com.google.gson.Gson;
 
 import java.io.EOFException;
@@ -43,7 +44,7 @@ public class ResponseAddUrlInterceptor implements Interceptor {
             response = chain.proceed(request);
         } catch (Exception e) {
             //捕获网络异常
-            throw new BaseException("请检查您的网络", -1, url);
+            throw new BaseException("请检查您的网络", MyCodes.HTTP_NET_ERROR, url);
         }
         if (response == null)
             return null;

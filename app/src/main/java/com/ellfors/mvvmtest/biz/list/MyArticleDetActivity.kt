@@ -35,9 +35,9 @@ class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.To
         val url = intent?.getStringExtra("url")
 
         setWebSetting()
-        mBinding.webview.let {
-            it.webChromeClient = webChromeClient
-            it.webViewClient = webViewClient
+        mBinding.webview.run {
+            webChromeClient = webChromeClient
+            webViewClient = webViewClient
         }
 
         if (!url.isNullOrEmpty())
@@ -50,7 +50,7 @@ class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.To
 
     override fun onDestroy() {
         super.onDestroy()
-        mBinding.webview.run {
+        mBinding.webview.apply {
             clearCache(true)
             stopLoading()
             destroy()
@@ -63,24 +63,24 @@ class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.To
      */
     @SuppressLint("SetJavaScriptEnabled")
     private fun setWebSetting() {
-        mBinding.webview.settings.let {
-            it.javaScriptEnabled = true //支持JS
-            it.javaScriptCanOpenWindowsAutomatically =
+        mBinding.webview.settings.run {
+            javaScriptEnabled = true //支持JS
+            javaScriptCanOpenWindowsAutomatically =
                 true //设置js可以直接打开窗口，如window.open()，默认为false
-            it.defaultTextEncodingName = "utf-8" //设置默认编码
-            it.loadsImagesAutomatically = true //支持自动加载图片
-            it.useWideViewPort = true //设置此属性，可任意比例缩放。大视图模式
-            it.loadWithOverviewMode = true //和setUseWideViewPort(true)一起解决网页自适应问题
-            it.setAppCacheEnabled(false) //是否使用缓存
-            it.domStorageEnabled = true //DOM Storage
-            it.useWideViewPort = true
-            it.loadWithOverviewMode = true
-            it.cacheMode = WebSettings.LOAD_NO_CACHE //不使用缓存
-            it.setSupportZoom(true) // 设置可以支持缩放
-            it.builtInZoomControls = true // 设置出现缩放工具
-            it.useWideViewPort = true //设置可在大视野范围内上下左右拖动，并且可以任意比例缩放
-            it.loadWithOverviewMode = true //设置默认加载的可视范围是大视野范围
-            it.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN //自适应屏幕
+            defaultTextEncodingName = "utf-8" //设置默认编码
+            loadsImagesAutomatically = true //支持自动加载图片
+            useWideViewPort = true //设置此属性，可任意比例缩放。大视图模式
+            loadWithOverviewMode = true //和setUseWideViewPort(true)一起解决网页自适应问题
+            setAppCacheEnabled(false) //是否使用缓存
+            domStorageEnabled = true //DOM Storage
+            useWideViewPort = true
+            loadWithOverviewMode = true
+            cacheMode = WebSettings.LOAD_NO_CACHE //不使用缓存
+            setSupportZoom(true) // 设置可以支持缩放
+            builtInZoomControls = true // 设置出现缩放工具
+            useWideViewPort = true //设置可在大视野范围内上下左右拖动，并且可以任意比例缩放
+            loadWithOverviewMode = true //设置默认加载的可视范围是大视野范围
+            layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN //自适应屏幕
         }
     }
 

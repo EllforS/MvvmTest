@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseActivity
 import com.ellfors.mvvmtest.base.BaseRcvData
+import com.ellfors.mvvmtest.bean.ViewTypeContentBean
+import com.ellfors.mvvmtest.bean.ViewTypeTitleBean
 import com.ellfors.mvvmtest.databinding.ActivityViewTypeBinding
 import com.ellfors.mvvmtest.widget.CommonToolBar
 
@@ -30,6 +32,7 @@ class ViewTypeActivity : BaseActivity<ActivityViewTypeBinding>(), CommonToolBar.
         get() = R.layout.activity_view_type
 
     override fun initData() {
+        setEditTextTouchOutSide(true)
         mBinding.rcvViewType.run {
             layoutManager = LinearLayoutManager(this@ViewTypeActivity)
             adapter = mAdapter

@@ -44,4 +44,17 @@ class HttpManager {
             .build()
             .create(clz)
     }
+
+    /**
+     * 获取Gson解析的HttpApi
+     */
+    fun <T> getGsonHttpApi(url: String?, clz: Class<T>): T {
+        return Retrofit.Builder()
+            .client(okHttpClientBuilder.build())
+            .baseUrl(url)
+            .addConverterFactory(GsonConverterFactory.create())
+//            .addCallAdapterFactory(LiveDataCallAdapterFactory())
+            .build()
+            .create(clz)
+    }
 }

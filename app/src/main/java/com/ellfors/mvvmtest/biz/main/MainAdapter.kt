@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseRcvAdp
-import com.ellfors.mvvmtest.base.BaseViewHolder
+import com.ellfors.mvvmtest.base.BaseVH
 import com.ellfors.mvvmtest.biz.edit.EditActivity
 import com.ellfors.mvvmtest.biz.img.MyImageActivity
 import com.ellfors.mvvmtest.biz.list.MyArticleActivity
@@ -13,7 +13,7 @@ import com.ellfors.mvvmtest.biz.time.TimeDownActivity
 import com.ellfors.mvvmtest.biz.viewtype.ViewTypeActivity
 import com.ellfors.mvvmtest.databinding.ItemMainBinding
 import com.ellfors.mvvmtest.utils.NotificationUtil
-import com.ellfors.mvvmtest.utils.TsUtil
+import com.ellfors.mvvmtest.utils.ToastUtil
 
 /**
  * MainAdapter
@@ -33,16 +33,16 @@ class MainAdapter(override val mContext: AppCompatActivity) : BaseRcvAdp<String>
     }
 
     override fun onCreate(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return BaseViewHolder<ItemMainBinding>(buildBinding(parent, R.layout.item_main))
+        return buildBinding<ItemMainBinding>(parent, R.layout.item_main)
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun onBind(holder: RecyclerView.ViewHolder, position: Int) {
-        val mHolder = holder as BaseViewHolder<ItemMainBinding>
-        mHolder.binding.let {
-            it.name = mDatas[position]
-            it.adapter = this
-            it.executePendingBindings()
+    override fun onBind(holder: RecyclerView.ViewHolder, bean: String, position: Int) {
+        val mHolder = holder as BaseVH<ItemMainBinding>
+        mHolder.binding.run {
+            name = bean
+            adapter = this@MainAdapter
+            executePendingBindings()
         }
     }
 
@@ -60,7 +60,7 @@ class MainAdapter(override val mContext: AppCompatActivity) : BaseRcvAdp<String>
                 ViewTypeActivity.start(mContext)
             mDatas[5] -> {
                 if (NotificationUtil.requsetNotificationPermission(mContext))
-                    TsUtil.showToast("已开启通知权限")
+                    ToastUtil.showToast("已开启通知权限")
             }
         }
     }

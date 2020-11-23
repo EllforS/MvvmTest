@@ -7,7 +7,7 @@
 
         <variable
             name="titleBean"
-            type="com.ellfors.mvvmtest.biz.viewtype.ViewTypeTitleBean" />
+            type="com.ellfors.mvvmtest.bean.ViewTypeTitleBean" />
 
         <variable
             name="adp"

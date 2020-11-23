@@ -1,4 +1,4 @@
-package com.ellfors.mvvmtest.biz.viewtype
+package com.ellfors.mvvmtest.bean
 
 /**
  * ContentBean

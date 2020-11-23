@@ -37,11 +37,11 @@ class MyImageActivity : BaseActivity<ImageBinding>() {
     }
 
     override fun observerUI() {
-        mViewModel.let { vm ->
-            vm.girl.observe(this, Observer {
+        mViewModel.run {
+            girl.observe(this@MyImageActivity, Observer {
                 Log.d("AAA", "图片地址：$it")
             })
-            vm.mException.observe(this, Observer {
+            mException.observe(this@MyImageActivity, Observer {
 
             })
         }

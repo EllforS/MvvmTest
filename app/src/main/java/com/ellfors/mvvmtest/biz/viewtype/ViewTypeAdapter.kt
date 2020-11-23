@@ -1,20 +1,17 @@
 package com.ellfors.mvvmtest.biz.viewtype
 
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ellfors.mvvmtest.R
 import com.ellfors.mvvmtest.base.BaseRcvAdp
 import com.ellfors.mvvmtest.base.BaseRcvData
-import com.ellfors.mvvmtest.base.BaseViewHolder
+import com.ellfors.mvvmtest.base.BaseVH
+import com.ellfors.mvvmtest.bean.ViewTypeContentBean
+import com.ellfors.mvvmtest.bean.ViewTypeTitleBean
 import com.ellfors.mvvmtest.databinding.ItemViewtypeContentBinding
 import com.ellfors.mvvmtest.databinding.ItemViewtypeTitleBinding
-import com.ellfors.mvvmtest.utils.TsUtil
+import com.ellfors.mvvmtest.utils.ToastUtil
 import java.lang.StringBuilder
 
 /**
@@ -30,35 +27,38 @@ class ViewTypeAdapter(override val mContext: AppCompatActivity) : BaseRcvAdp<Bas
 
     override fun onCreate(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            TYPE_TITLE -> BaseViewHolder<ItemViewtypeTitleBinding>(buildBinding(parent, R.layout.item_viewtype_title))
-            TYPE_CONTENT -> BaseViewHolder<ItemViewtypeContentBinding>(buildBinding(parent, R.layout.item_viewtype_content))
-            else -> BaseViewHolder<ItemViewtypeContentBinding>(buildBinding(parent, R.layout.item_viewtype_content))
+            TYPE_TITLE ->
+                buildBinding<ItemViewtypeTitleBinding>(parent, R.layout.item_viewtype_title)
+            else ->
+                buildBinding<ItemViewtypeContentBinding>(parent, R.layout.item_viewtype_content)
         }
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun onBind(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBind(holder: RecyclerView.ViewHolder, bean: BaseRcvData, position: Int) {
         when (holder.itemViewType) {
             TYPE_TITLE -> {
-                val mTitleHolder = holder as BaseViewHolder<ItemViewtypeTitleBinding>
-                val mTitleBean = mDatas[position].data as ViewTypeTitleBean
+                val mTitleHolder = holder as BaseVH<ItemViewtypeTitleBinding>
+                val mTitleBean = bean.data as ViewTypeTitleBean
                 mTitleHolder.binding.run {
                     titleBean = mTitleBean
                     adp = this@ViewTypeAdapter
+                    executePendingBindings()
                 }
             }
             TYPE_CONTENT -> {
-                val mContentHolder = holder as BaseViewHolder<ItemViewtypeContentBinding>
-                val mContentBean = mDatas[position].data as ViewTypeContentBean
+                val mContentHolder = holder as BaseVH<ItemViewtypeContentBinding>
+                val mContentBean = bean.data as ViewTypeContentBean
                 mContentHolder.binding.run {
                     contentBean = mContentBean
+                    executePendingBindings()
                 }
             }
         }
     }
 
     fun onTitleClick(bean: ViewTypeTitleBean) {
-        TsUtil.showToast("${bean.title}点击...")
+        ToastUtil.showToast("${bean.title}点击...")
     }
 
     fun logContentData(): String {
