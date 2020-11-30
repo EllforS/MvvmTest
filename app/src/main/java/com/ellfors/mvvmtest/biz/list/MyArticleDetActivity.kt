@@ -36,8 +36,8 @@ class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.To
 
         setWebSetting()
         mBinding.webview.run {
-            webChromeClient = webChromeClient
-            webViewClient = webViewClient
+            webChromeClient = mWebChromeClient
+            webViewClient = mWebViewClient
         }
 
         if (!url.isNullOrEmpty())
@@ -87,7 +87,7 @@ class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.To
     /**
      * 构建webViewClient
      */
-    var webViewClient = object : WebViewClient() {
+    var mWebViewClient = object : WebViewClient() {
         override fun onPageFinished(view: WebView, url: String) {
             view.visibility = View.VISIBLE
         }
@@ -105,7 +105,7 @@ class MyArticleDetActivity : BaseActivity<ArticleDetBinding>(), CommonToolBar.To
     /**
      * 构建webChromeClient
      */
-    var webChromeClient = object : WebChromeClient() {
+    var mWebChromeClient = object : WebChromeClient() {
         override fun onProgressChanged(view: WebView, newProgress: Int) {
             mBinding.progress.apply {
                 progress = newProgress

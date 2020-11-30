@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.ellfors.mvvmtest.biz.touchbar.TouchBarActivity" />
+
+    </data>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.ellfors.mvvmtest.widget.CommonToolBar
+            android:id="@+id/toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:toolbar_positive="打印"
+            app:toolbar_title="进度条" />
+
+        <com.ellfors.mvvmtest.widget.TouchBarView
+            android:id="@+id/touchbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="14dp" />
+
+        <TextView
+            android:id="@+id/tv_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="14dp"
+            android:hint="当前数值"
+            android:text="@{activity.MValue}"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_cccccc" />
+
+    </LinearLayout>
+
+</layout>

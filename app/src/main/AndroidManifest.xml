@@ -38,6 +38,10 @@
 
         <activity android:name=".biz.viewtype.ViewTypeActivity" />
 
+        <activity android:name=".biz.touchbar.TouchBarActivity" />
+
+        <activity android:name=".biz.mmkv.MMKVActivity" />
+
     </application>
 
 </manifest>

@@ -4,14 +4,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import com.ellfors.mvvmtest.vm.repository.ArticleRepo
 import com.ellfors.mvvmtest.vm.repository.ImageRepo
-import com.ellfors.mvvmtest.vm.factory.ArticleVMFactory
-import com.ellfors.mvvmtest.vm.factory.EditVMFactory
-import com.ellfors.mvvmtest.vm.factory.ImageVMFactory
-import com.ellfors.mvvmtest.vm.factory.TimeDownVMFactory
-import com.ellfors.mvvmtest.vm.viewmodel.ArticleVM
-import com.ellfors.mvvmtest.vm.viewmodel.EditVM
-import com.ellfors.mvvmtest.vm.viewmodel.ImageVM
-import com.ellfors.mvvmtest.vm.viewmodel.TimeDownVM
+import com.ellfors.mvvmtest.vm.viewmodel.*
 
 /**
  * InjectUtils
@@ -20,18 +13,22 @@ import com.ellfors.mvvmtest.vm.viewmodel.TimeDownVM
 object VMInjectUtil {
 
     fun injectImageVM(owner: ViewModelStoreOwner): ImageVM {
-        return ViewModelProvider(owner, ImageVMFactory(ImageRepo.instance)).get(ImageVM::class.java)
+        return ViewModelProvider(owner, ImageVM.ImageVMFactory(ImageRepo.instance)).get(ImageVM::class.java)
     }
 
     fun injectArticleVM(owner: ViewModelStoreOwner): ArticleVM {
-        return ViewModelProvider(owner, ArticleVMFactory(ArticleRepo.instance)).get(ArticleVM::class.java)
+        return ViewModelProvider(owner, ArticleVM.ArticleVMFactory(ArticleRepo.instance)).get(ArticleVM::class.java)
     }
 
     fun injectTimeDownVM(owner: ViewModelStoreOwner): TimeDownVM {
-        return ViewModelProvider(owner, TimeDownVMFactory()).get(TimeDownVM::class.java)
+        return ViewModelProvider(owner, TimeDownVM.TimeDownVMFactory()).get(TimeDownVM::class.java)
     }
 
     fun injectEditVM(owner: ViewModelStoreOwner): EditVM {
-        return ViewModelProvider(owner, EditVMFactory()).get(EditVM::class.java)
+        return ViewModelProvider(owner, EditVM.EditVMFactory()).get(EditVM::class.java)
+    }
+
+    fun injectMMKVVM(owner: ViewModelStoreOwner): MMKVVM {
+        return ViewModelProvider(owner, MMKVVM.MMKVVMFactory()).get(MMKVVM::class.java)
     }
 }

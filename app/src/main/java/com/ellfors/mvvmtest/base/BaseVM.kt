@@ -30,8 +30,14 @@ open class BaseVM : ViewModel() {
             handleException(
                 { withContext(Dispatchers.IO) { block() } },
                 { res ->
-                    executeResponse(res) { success(it) }
-                    mException.postValue(BaseException())
+                    executeResponse(res, {
+                        success(it)
+                    }, {
+                        error(it)
+                        mException.postValue(it)
+                        if (!it.message.isNullOrEmpty())
+                            ToastUtil.showToast(it.message)
+                    })
                 },
                 {
                     error(it)
@@ -60,13 +66,14 @@ open class BaseVM : ViewModel() {
             handleException(
                 { withContext(Dispatchers.IO) { block() } },
                 { res ->
-                    coroutineScope {
-                        if (res.status == 100)
-                            success(res)
-                        else
-                            throw Exception("这里是Msg")
-                    }
-                    mException.postValue(BaseException())
+                    executeBaseResponse(res, {
+                        success(it)
+                    }, {
+                        error(it)
+                        mException.postValue(it)
+                        if (!it.message.isNullOrEmpty())
+                            ToastUtil.showToast(it.message)
+                    })
                 },
                 {
                     error(it)
@@ -98,8 +105,8 @@ open class BaseVM : ViewModel() {
      * 异常统一处理
      */
     private suspend fun <T> handleException(
-        block: suspend CoroutineScope.() -> BaseResponse<T>,
-        success: suspend CoroutineScope.(BaseResponse<T>) -> Unit,
+        block: suspend CoroutineScope.() -> BaseResponse<T>?,
+        success: suspend CoroutineScope.(BaseResponse<T>?) -> Unit,
         error: suspend CoroutineScope.(BaseException) -> Unit,
         complete: suspend CoroutineScope.() -> Unit
     ) {
@@ -121,14 +128,39 @@ open class BaseVM : ViewModel() {
      * 请求结果过滤
      */
     private suspend fun <T> executeResponse(
-        response: BaseResponse<T>,
-        success: suspend CoroutineScope.(T) -> Unit
+        response: BaseResponse<T>?,
+        success: suspend CoroutineScope.(T) -> Unit,
+        error: suspend CoroutineScope.(BaseException) -> Unit
     ) {
         coroutineScope {
+            if (response == null) {
+                error(BaseException("数据为空", -100))
+                return@coroutineScope
+            }
             if (response.status == 100)
                 success(response.data)
             else
-                throw Exception("这里是Msg")
+                error(BaseException("Response的数据", response.status))
+        }
+    }
+
+    /**
+     * 请求结果过滤
+     */
+    private suspend fun <T> executeBaseResponse(
+        response: BaseResponse<T>?,
+        success: suspend CoroutineScope.(BaseResponse<T>) -> Unit,
+        error: suspend CoroutineScope.(BaseException) -> Unit
+    ) {
+        coroutineScope {
+            if (response == null) {
+                error(BaseException("数据为空", -100))
+                return@coroutineScope
+            }
+            if (response.status == 100)
+                success(response)
+            else
+                error(BaseException("Response的数据", response.status))
         }
     }
 }

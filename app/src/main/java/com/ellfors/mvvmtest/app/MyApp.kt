@@ -11,6 +11,7 @@ import com.orhanobut.logger.PrettyFormatStrategy
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.tencent.mmkv.MMKV
 import com.tencent.smtt.sdk.QbSdk
 
 
@@ -28,11 +29,22 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
+        initMMKV()
         initLogger()
         initX5WebView()
         initRefreshLayout()
     }
 
+    /**
+     * 初始化MMKV
+     */
+    private fun initMMKV() {
+        MMKV.initialize(this)
+    }
+
+    /**
+     * 初始化打印工具类
+     */
     private fun initLogger() {
         val formatStrategy = PrettyFormatStrategy.newBuilder()
             .showThreadInfo(false)  //不显示线程信息
@@ -48,6 +60,9 @@ class MyApp : Application() {
         })
     }
 
+    /**
+     * 初始化X5
+     */
     private fun initX5WebView() {
         QbSdk.initX5Environment(applicationContext, null)
     }
@@ -55,6 +70,7 @@ class MyApp : Application() {
     /**
      * 初始化刷新加载控件
      */
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun initRefreshLayout() {
         //设置刷新文字
         ClassicsHeader.REFRESH_HEADER_PULLING = "下拉刷新"

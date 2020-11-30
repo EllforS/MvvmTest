@@ -2,6 +2,7 @@ package com.ellfors.mvvmtest.vm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.ellfors.mvvmtest.base.BaseVM
+import com.ellfors.mvvmtest.base.BaseVMFactory
 import com.ellfors.mvvmtest.bean.ArticlesBean
 import com.ellfors.mvvmtest.vm.repository.ArticleRepo
 
@@ -9,7 +10,12 @@ import com.ellfors.mvvmtest.vm.repository.ArticleRepo
  * ArticleVM
  * 2020-05-19 14:53
  */
-class ArticleVM constructor(private val mRepository: ArticleRepo) : BaseVM() {
+class ArticleVM(private val mRepository: ArticleRepo) : BaseVM() {
+
+    class ArticleVMFactory(private val mRepo: ArticleRepo) : BaseVMFactory() {
+        override val mViewModel: BaseVM
+            get() = ArticleVM(mRepo)
+    }
 
     val mArticles = MutableLiveData<MutableList<ArticlesBean>>()
     var isRefreshing = MutableLiveData(true)
@@ -36,7 +42,8 @@ class ArticleVM constructor(private val mRepository: ArticleRepo) : BaseVM() {
             mArticles.value = it.data
             hasMore.value = it.page < it.page_count
         }, {
-
+            mArticles.value = arrayListOf()
+            hasMore.value = false
         }, {
             isRefreshing.value = false
             isLoading.value = false

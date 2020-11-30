@@ -28,7 +28,7 @@ object ToastUtil {
         mToast?.cancel()
     }
 
-    @SuppressLint("ShowToast")
+    @SuppressLint("ShowToast", "UseCompatLoadingForDrawables")
     fun showToast(text: String?, iconResId: Int, duration: Int) {
         if (text.isNullOrEmpty())
             return
