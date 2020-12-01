@@ -44,6 +44,21 @@
             android:textColor="@color/color_333333"
             android:textColorHint="@color/color_cccccc" />
 
+        <Button
+            android:id="@+id/btn_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="@{()->activity.setValue()}"
+            android:text="设置数值" />
+
+        <Button
+            android:id="@+id/btn_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->activity.checkEnable()}"
+            android:text='@{@string/touch_bar_check_enable(String.valueOf(activity.mTouchEnable))}' />
+
     </LinearLayout>
 
 </layout>

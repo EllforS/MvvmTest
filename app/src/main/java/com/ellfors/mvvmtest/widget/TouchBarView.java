@@ -44,6 +44,7 @@ public class TouchBarView extends View {
     private int mValueOffset;
 
     private int downX;
+    private boolean isEnable = true;
 
     public TouchBarView(Context context) {
         super(context);
@@ -113,6 +114,8 @@ public class TouchBarView extends View {
     @Override
     @SuppressLint("ClickableViewAccessibility")
     public boolean onTouchEvent(MotionEvent event) {
+        if (!isEnable)
+            return true;
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 downX = (int) event.getX();
@@ -128,7 +131,6 @@ public class TouchBarView extends View {
         mCircleStartX = downX;
         mValueText = ((float) (mCircleStartX - mLargeCircleRadius)) / ((float) (mLineLength + mLineWidth - mLargeCircleRadius * 2));
         invalidate();
-
         return true;
     }
 
@@ -187,13 +189,22 @@ public class TouchBarView extends View {
         mCanvas.drawText(getText(), mValueOffset, mCircleStartY - offset, paint);
     }
 
+    public void setEnable(boolean flag) {
+        this.isEnable = flag;
+    }
+
+    public void setValue(int value) {
+        mCircleStartX = (mLineLength + mLineWidth - mLargeCircleRadius * 2) * value / 100 + mLargeCircleRadius + mLargeCircleStrokeWidth;
+        mValueText = ((float) (mCircleStartX - mLargeCircleRadius)) / ((float) (mLineLength + mLineWidth - mLargeCircleRadius * 2));
+        invalidate();
+    }
+
     public String getText() {
+        mValueText = Math.min(100, mValueText);
+        mValueText = Math.max(0, mValueText);
         DecimalFormat formater = new DecimalFormat(",#0");
-        // 设置最大小数位数
         formater.setMaximumFractionDigits(0);
-        // 设置分组大小，也就是显示逗号的位置
         formater.setGroupingSize(3);
-        // 设置四舍五入的模式
         formater.setRoundingMode(RoundingMode.FLOOR);
         return formater.format(mValueText * 100) + "%";
     }
